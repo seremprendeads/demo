@@ -67,7 +67,7 @@
 </head>
 <body class="bg-white">
     <!-- Header/Navigation -->
-    <header class="fixed w-full top-0 z-50 bg-white shadow-lg">
+    <header class="fixed w-full top-0 z-50 bg-black shadow-lg">
         <nav class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
@@ -78,44 +78,46 @@
                 
                 <!-- Desktop/Tablet Menu -->
                 <div class="hidden lg:flex space-x-8 items-center">
-                    <a href="#inicio" class="text-gray-700 hover:text-purple-600 transition-colors">Inicio</a>
-                    <a href="#nosotros" class="text-gray-700 hover:text-purple-600 transition-colors">Nosotros</a>
-                    <a href="#servicios" class="text-gray-700 hover:text-purple-600 transition-colors">Servicios</a>
-                    <a href="#trabajos" class="text-gray-700 hover:text-purple-600 transition-colors">Trabajos</a>
-                    <a href="#galeria" class="text-gray-700 hover:text-purple-600 transition-colors">Galería</a>
-                    <a href="#testimonios" class="text-gray-700 hover:text-purple-600 transition-colors">Testimonios</a>
-                    <a href="#faq" class="text-gray-700 hover:text-purple-600 transition-colors">FAQ</a>
-                    <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
-                        Contacto
-                    </button>
+                    <a href="#inicio" class="text-gray-200 hover:text-purple-600 transition-colors">Inicio</a>
+                    <a href="#nosotros" class="text-gray-200 hover:text-purple-600 transition-colors">Nosotros</a>
+                    <a href="#servicios" class="text-gray-200 hover:text-purple-600 transition-colors">Servicios</a>
+                    <a href="#trabajos" class="text-gray-200 hover:text-purple-600 transition-colors">Trabajos</a>
+                    <a href="#galeria" class="text-gray-200 hover:text-purple-600 transition-colors">Galería</a>
+                    <a href="#testimonios" class="text-gray-200 hover:text-purple-600 transition-colors">Testimonios</a>
+                    <a href="#faq" class="text-gray-200 hover:text-purple-600 transition-colors">FAQ</a>
+                    <a href="#contacto" class="bg-green-600 text-white font-bold px-3 py-2 rounded-full hover:bg-green-300 transition-colors duration-300 inline-flex items-center animate-pulse">
+                        Empecemos Hoy
+                          <img src="https://cdn.simpleicons.org/Whatsapp/ffffff" alt="WhatsApp" class="ml-2 h-6 w-6"/>
+                      </a>
                 </div>
                 
                 <!-- Mobile Menu Button -->
                 <button class="lg:hidden hamburger" onclick="toggleMenu()">
-                    <span class="block w-6 h-0.5 bg-gray-700 mb-1 transition-all"></span>
-                    <span class="block w-6 h-0.5 bg-gray-700 mb-1 transition-all"></span>
-                    <span class="block w-6 h-0.5 bg-gray-700 transition-all"></span>
+                    <span class="block w-6 h-0.5 bg-gray-200 mb-1 transition-all"></span>
+                    <span class="block w-6 h-0.5 bg-gray-200 mb-1 transition-all"></span>
+                    <span class="block w-6 h-0.5 bg-gray-200 transition-all"></span>
                 </button>
             </div>
             
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="lg:hidden hidden mt-4 pb-4">
-                <a href="#inicio" class="block py-2 text-gray-700 hover:text-purple-600">Inicio</a>
-                <a href="#nosotros" class="block py-2 text-gray-700 hover:text-purple-600">Nosotros</a>
-                <a href="#servicios" class="block py-2 text-gray-700 hover:text-purple-600">Servicios</a>
-                <a href="#trabajos" class="block py-2 text-gray-700 hover:text-purple-600">Trabajos</a>
-                <a href="#galeria" class="block py-2 text-gray-700 hover:text-purple-600">Galería</a>
-                <a href="#testimonios" class="block py-2 text-gray-700 hover:text-purple-600">Testimonios</a>
-                <a href="#faq" class="block py-2 text-gray-700 hover:text-purple-600">FAQ</a>
-                <button class="mt-4 w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full">
-                    Contacto
-                </button>
+                <a href="#inicio" class="block py-2 text-gray-200 hover:text-purple-600">Inicio</a>
+                <a href="#nosotros" class="block py-2 text-gray-200 hover:text-purple-600">Nosotros</a>
+                <a href="#servicios" class="block py-2 text-gray-200 hover:text-purple-600">Servicios</a>
+                <a href="#trabajos" class="block py-2 text-gray-200 hover:text-purple-600">Trabajos</a>
+                <a href="#galeria" class="block py-2 text-gray-200 hover:text-purple-600">Galería</a>
+                <a href="#testimonios" class="block py-2 text-gray-200 hover:text-purple-600">Testimonios</a>
+                <a href="#faq" class="block py-2 text-gray-200 hover:text-purple-600">FAQ</a>
+                <a href="#contacto" class="bg-green-600 text-white font-bold px-3 py-2 rounded-full hover:bg-green-300 transition-colors duration-300 inline-flex items-center animate-pulse">
+                    Empecemos Hoy
+                      <img src="https://cdn.simpleicons.org/Whatsapp/ffffff" alt="WhatsApp" class="ml-2 h-6 w-6"/>
+                  </a>
             </div>
         </nav>
     </header>
 
   <!-- Hero Section -->
-<section id="inicio" class="pt-20 min-h-screen bg-[url(img/salon-de-bodas3.jpg)] bg-cover bg-center bg-no-repeat text-white relative">
+<section id="inicio" class="pt-20 min-h-screen bg-[url(img/fondo-roto.webp)] bg-cover bg-center bg-no-repeat text-white relative">
     <!-- Overlay (opcional) -->
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
 
@@ -131,7 +133,7 @@
             <p class="text-xl md:text-2xl mb-8 opacity-90">
                 Diseño web, desarrollo y marketing digital que impulsa tu negocio al siguiente nivel
             </p>
-             <div class="flex flex-col items-center space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+            <div class="flex flex-col items-center space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
                 <button class="w-full sm:w-auto bg-yellow-400 text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all">
                     Ver Nuestro Trabajo
                 </button>
@@ -139,6 +141,8 @@
                     Comenzar Proyecto
                 </button>
             </div>
+            
+            
         </div>
     </div>
 </section>
