@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Creativo - Diseño y Desarrollo Web</title>
+    <!-- Tailwind v3.x CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .hamburger {
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        .wave-separator {
+            position: relative;
+            overflow: hidden;
+        }
+        .wave-separator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+            background-size: cover;
+        }
+        .diagonal-separator {
+            clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 80%);
+        }
+        .torn-separator {
+            position: relative;
+            background: linear-gradient(45deg, transparent 30%, #f3f4f6 30%);
+        }
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-white shadow-lg">
+        <nav class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <img src="img/logo-seremprende_egvn3o.png" alt="logo" class="h-14 w-14">
+          
+                  
+              
+                
+                <!-- Desktop/Tablet Menu -->
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="#inicio" class="text-gray-700 hover:text-purple-600 transition-colors">Inicio</a>
+                    <a href="#nosotros" class="text-gray-700 hover:text-purple-600 transition-colors">Nosotros</a>
+                    <a href="#servicios" class="text-gray-700 hover:text-purple-600 transition-colors">Servicios</a>
+                    <a href="#trabajos" class="text-gray-700 hover:text-purple-600 transition-colors">Trabajos</a>
+                    <a href="#galeria" class="text-gray-700 hover:text-purple-600 transition-colors">Galería</a>
+                    <a href="#testimonios" class="text-gray-700 hover:text-purple-600 transition-colors">Testimonios</a>
+                    <a href="#faq" class="text-gray-700 hover:text-purple-600 transition-colors">FAQ</a>
+                    <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
+                        Contacto
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden hamburger" onclick="toggleMenu()">
+                    <span class="block w-6 h-0.5 bg-gray-700 mb-1 transition-all"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700 mb-1 transition-all"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700 transition-all"></span>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="lg:hidden hidden mt-4 pb-4">
+                <a href="#inicio" class="block py-2 text-gray-700 hover:text-purple-600">Inicio</a>
+                <a href="#nosotros" class="block py-2 text-gray-700 hover:text-purple-600">Nosotros</a>
+                <a href="#servicios" class="block py-2 text-gray-700 hover:text-purple-600">Servicios</a>
+                <a href="#trabajos" class="block py-2 text-gray-700 hover:text-purple-600">Trabajos</a>
+                <a href="#galeria" class="block py-2 text-gray-700 hover:text-purple-600">Galería</a>
+                <a href="#testimonios" class="block py-2 text-gray-700 hover:text-purple-600">Testimonios</a>
+                <a href="#faq" class="block py-2 text-gray-700 hover:text-purple-600">FAQ</a>
+                <button class="mt-4 w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full">
+                    Contacto
+                </button>
+            </div>
+        </nav>
+    </header>
+
+  <!-- Hero Section -->
+<section id="inicio" class="pt-20 min-h-screen bg-[url(img/salon-de-bodas3.jpg)] bg-cover bg-center bg-no-repeat text-white relative">
+    <!-- Overlay (opcional) -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+
+    <div class="container mx-auto px-4 py-20 relative z-10">
+        <div class="text-center">
+
+            <img src="img/logo-seremprende_egvn3o.png" alt="logo" class="h-32 w-32 mx-auto mb-6">
+
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 floating-animation">
+                Transformamos Ideas en 
+                <span class="text-yellow-400">Experiencias Digitales</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                Diseño web, desarrollo y marketing digital que impulsa tu negocio al siguiente nivel
+            </p>
+            <div class="space-x-4">
+                <button class="bg-yellow-400 text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all">
+                    Ver Nuestro Trabajo
+                </button>
+                <button class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-all">
+                    Comenzar Proyecto
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Nosotros Section -->
+    <section id="nosotros" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Quiénes <span class="gradient-text">Somos</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Somos un equipo de creativos y desarrolladores especializados en crear soluciones digitales 
+                    que conectan marcas con sus audiencias de manera memorable y efectiva.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold text-purple-600 mb-3">Nuestra Misión</h3>
+                        <p class="text-gray-700">
+                            Empoderar a las empresas con presencia digital impactante que genere resultados reales 
+                            y conexiones auténticas con sus clientes.
+                        </p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold text-blue-600 mb-3">Nuestra Visión</h3>
+                        <p class="text-gray-700">
+                            Ser el estudio de referencia en diseño web y desarrollo digital, conocidos por nuestra 
+                            innovación, calidad y compromiso con el éxito de nuestros clientes.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-100 to-blue-100 p-8 rounded-2xl">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">🚀</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">+150 Proyectos Exitosos</h3>
+                        <p class="text-gray-600">
+                            Hemos ayudado a más de 150 empresas a transformar su presencia digital 
+                            y alcanzar sus objetivos comerciales.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Banner Motivacional 1 -->
+   <section class="py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-center">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl md:text-6xl font-bold mb-6">
+            "El diseño no es solo cómo se ve, es cómo funciona"
+        </h2>
+        <p class="text-xl opacity-90">
+            - Steve Jobs
+        </p>
+    </div>
+</section>
+
+
+    <!-- Servicios Section -->
+    <section id="servicios" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Nuestros <span class="gradient-text">Servicios</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Ofrecemos soluciones integrales de diseño y desarrollo web que impulsan tu negocio
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Diseño Web UX/UI</h3>
+                    <p class="text-gray-600 mb-6">
+                        Creamos interfaces intuitivas y atractivas que convierten visitantes en clientes, 
+                        optimizadas para todos los dispositivos.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>• Diseño responsivo</li>
+                        <li>• Experiencia de usuario</li>
+                        <li>• Prototipado interactivo</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2">
+                    <div class="text-4xl mb-4">💻</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Desarrollo Web</h3>
+                    <p class="text-gray-600 mb-6">
+                        Desarrollamos sitios web rápidos, seguros y escalables utilizando las últimas tecnologías 
+                        y mejores prácticas del mercado.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>• HTML5, CSS3, JavaScript</li>
+                        <li>• React, Vue, Angular</li>
+                        <li>• CMS personalizados</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">SEO & Marketing</h3>
+                    <p class="text-gray-600 mb-6">
+                        Optimizamos tu sitio web para motores de búsqueda y creamos estrategias de marketing 
+                        digital que generen resultados medibles.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>• Optimización SEO</li>
+                        <li>• Marketing de contenidos</li>
+                        <li>• Analítica web</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2">
+                    <div class="text-4xl mb-4">🛒</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">E-commerce</h3>
+                    <p class="text-gray-600 mb-6">
+                        Desarrollamos tiendas online completas que maximizan las conversiones y 
+                        facilitan la gestión de tu negocio digital.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>• Shopify, WooCommerce</li>
+                        <li>• Pasarelas de pago</li>
+                        <li>• Gestión de inventario</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Apps Móviles</h3>
+                    <p class="text-gray-600 mb-6">
+                        Creamos aplicaciones móviles nativas e híbridas que ofrecen experiencias 
+                        excepcionales en iOS y Android.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>• React Native, Flutter</li>
+                        <li>• Desarrollo nativo</li>
+                        <li>• Apps multiplataforma</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Branding Digital</h3>
+                    <p class="text-gray-600 mb-6">
+                        Desarrollamos identidades de marca coherentes y memorables que destacan 
+                        en el entorno digital competitivo.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>• Identidad visual</li>
+                        <li>• Guías de marca</li>
+                        <li>• Estrategia digital</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner Motivacional 1 -->
+    <section class="py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                "El diseño no es solo cómo se ve, es cómo funciona"
+            </h2>
+            <p class="text-xl opacity-90">
+                - Steve Jobs
+            </p>
+        </div>
+    </section>
+
+    <!-- Trabajos Section -->
+    <section id="trabajos" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Nuestros <span class="gradient-text">Trabajos</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Cada proyecto es una oportunidad de crear algo extraordinario
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group cursor-pointer">
+                    <div class="bg-gray-200 h-64 rounded-lg overflow-hidden mb-4">
+                        <div class="w-full h-full bg-gradient-to-br from-pink-400 to-purple-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <span class="text-white text-2xl font-bold">E-commerce Fashion</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tienda de Moda Online</h3>
+                    <p class="text-gray-600">Desarrollo completo de e-commerce con +300% aumento en conversiones</p>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="bg-gray-200 h-64 rounded-lg overflow-hidden mb-4">
+                        <div class="w-full h-full bg-gradient-to-br from-blue-400 to-teal-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <span class="text-white text-2xl font-bold">App Fintech</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Aplicación Financiera</h3>
+                    <p class="text-gray-600">App móvil con +50K descargas en los primeros 6 meses</p>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="bg-gray-200 h-64 rounded-lg overflow-hidden mb-4">
+                        <div class="w-full h-full bg-gradient-to-br from-green-400 to-blue-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <span class="text-white text-2xl font-bold">SaaS Platform</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Plataforma SaaS</h3>
+                    <p class="text-gray-600">Sistema de gestión empresarial con interfaz intuitiva</p>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="bg-gray-200 h-64 rounded-lg overflow-hidden mb-4">
+                        <div class="w-full h-full bg-gradient-to-br from-orange-400 to-red-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <span class="text-white text-2xl font-bold">Restaurant Web</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Sitio Web Restaurante</h3>
+                    <p class="text-gray-600">Web con reservas online que duplicó las ventas</p>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="bg-gray-200 h-64 rounded-lg overflow-hidden mb-4">
+                        <div class="w-full h-full bg-gradient-to-br from-purple-400 to-pink-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <span class="text-white text-2xl font-bold">Portfolio Artist</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Portfolio de Artista</h3>
+                    <p class="text-gray-600">Galería interactiva que aumentó la visibilidad del artista</p>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="bg-gray-200 h-64 rounded-lg overflow-hidden mb-4">
+                        <div class="w-full h-full bg-gradient-to-br from-indigo-400 to-purple-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <span class="text-white text-2xl font-bold">Corporate Site</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Sitio Corporativo</h3>
+                    <p class="text-gray-600">Rediseño completo que mejoró la imagen de marca</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Torn Separator -->
+    <div class="torn-separator h-32 bg-gray-100"></div>
+
+    <!-- Galería Section -->
+    <section id="galeria" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Galería <span class="gradient-text">Visual</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Una muestra de nuestro trabajo creativo y atención al detalle
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="bg-gradient-to-br from-red-400 to-pink-600 h-48 rounded-lg hover:scale-105 transition-transform cursor-pointer"></div>
+                <div class="bg-gradient-to-br from-blue-400 to-purple-600 h-48 rounded-lg hover:scale-105 transition-transform cursor-pointer"></div>
+                <div class="bg-gradient-to-br from-green-400 to-teal-600 h-48 rounded-lg hover:scale-105 transition-transform cursor-pointer"></div>
+                <div class="bg-gradient-to-br from-yellow-400 to-orange-600 h-48 rounded-lg hover:scale-105 transition-transform cursor-pointer"></div>
+                <div class="bg-gradient-to-br from-purple-400 to-indigo-600 h-48 rounded-lg hover:scale-105 transition-transform cursor-pointer"></div>
+                <div class="bg-gradient-to-br from-pink-400 to-red-600 h-48 rounded-lg hover:scale-105 transition-transform cursor-pointer"></div>
+                <div class="bg-gradient-to-br from-teal-400 to-blue-600 h-48 rounded-lg hover:scale-105 transition-transform cursor-pointer"></div>
+                <div class="bg-gradient-to-br from-orange-400 to-yellow-600 h-48 rounded-lg hover:scale-105 transition-transform cursor-pointer"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner Motivacional 2 -->
+    <section class="py-20 bg-gradient-to-r from-teal-600 to-green-600 text-white text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                "La innovación distingue entre líderes y seguidores"
+            </h2>
+            <p class="text-xl opacity-90">
+                Creamos experiencias que marcan la diferencia
+            </p>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Nuestro <span class="gradient-text">Equipo</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Profesionales apasionados por crear soluciones digitales excepcionales
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-br from-purple-400 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">JD</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Juan Pérez</h3>
+                    <p class="text-purple-600 font-semibold mb-2">Director Creativo</p>
+                    <p class="text-gray-600 text-sm">+8 años creando experiencias digitales memorables</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-br from-pink-400 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">MG</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">María González</h3>
+                    <p class="text-purple-600 font-semibold mb-2">Desarrolladora Senior</p>
+                    <p class="text-gray-600 text-sm">Especialista en desarrollo web y aplicaciones móviles</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-br from-blue-400 to-teal-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">CR</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Carlos Rodríguez</h3>
+                    <p class="text-purple-600 font-semibold mb-2">UX/UI Designer</p>
+                    <p class="text-gray-600 text-sm">Experto en diseño de experiencias centradas en el usuario</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gradient-to-br from-green-400 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">AL</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Ana López</h3>
+                    <p class="text-purple-600 font-semibold mb-2">Marketing Digital</p>
+                    <p class="text-gray-600 text-sm">Estratega en SEO y marketing de contenidos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios Section -->
+    <section id="testimonios" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Lo que Dicen Nuestros <span class="gradient-text">Clientes</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    La satisfacción de nuestros clientes es nuestra mejor carta de presentación
+                </p>
+            </div>
+            
+            <!-- Testimonios Escritos -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-500">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">
+                        "Increíble trabajo. Nuestro sitio web ahora convierte 3 veces más que antes. 
+                        El equipo entendió perfectamente nuestra visión y la ejecutó de manera brillante."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">RC</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Roberto Castro</h4>
+                            <p class="text-gray-600 text-sm">CEO, TechStart</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-500">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">
+                        "Profesionales excepcionales. Cumplieron todos los plazos y superaron nuestras expectativas. 
+                        La comunicación fue perfecta durante todo el proyecto."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-red-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">LM</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Laura Martínez</h4>
+                            <p class="text-gray-600 text-sm">Directora, Boutique Luna</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-500">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">
+                        "La aplicación móvil que desarrollaron transformó completamente nuestro negocio. 
+                        Increíble atención al detalle y soporte post-lanzamiento."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-teal-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">DS</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Diego Sánchez</h4>
+                            <p class="text-gray-600 text-sm">Fundador, FitApp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reviews de Google -->
+            <div class="bg-white p-8 rounded-xl shadow-lg mb-16">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Reseñas en Google</h3>
+                    <div class="flex justify-center items-center mb-6">
+                        <span class="text-6xl font-bold text-green-600 mr-4">4.9</span>
+                        <div>
+                            <div class="flex text-yellow-500 text-2xl mb-2">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <p class="text-gray-600">Basado en 127 reseñas</p>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <p class="text-gray-600 italic mb-2">
+                                "Excelente servicio, muy profesionales y creativos..."
+                            </p>
+                            <p class="text-sm text-gray-500">- Isabel R.</p>
+                        </div>
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <p class="text-gray-600 italic mb-2">
+                                "Superaron todas mis expectativas. Altamente recomendado..."
+                            </p>
+                            <p class="text-sm text-gray-500">- Miguel A.</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <p class="text-gray-600 italic mb-2">
+                                "Trabajo impecable y entrega puntual. Volveré a trabajar con ellos..."
+                            </p>
+                            <p class="text-sm text-gray-500">- Carmen V.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Videos de Testimonios (Simulados - Vimeo) -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-gray-800 text-center mb-8">Testimonios en Video</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-900 rounded-lg overflow-hidden aspect-video relative group cursor-pointer">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-600/80 to-blue-600/80 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <div class="text-4xl mb-2">▶️</div>
+                                <p class="font-semibold">Cliente Satisfecho #1</p>
+                                <p class="text-sm opacity-80">Testimonio de éxito</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 rounded-lg overflow-hidden aspect-video relative group cursor-pointer">
+                        <div class="absolute inset-0 bg-gradient-to-br from-green-600/80 to-teal-600/80 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <div class="text-4xl mb-2">▶️</div>
+                                <p class="font-semibold">Cliente Satisfecho #2</p>
+                                <p class="text-sm opacity-80">Caso de estudio</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 rounded-lg overflow-hidden aspect-video relative group cursor-pointer">
+                        <div class="absolute inset-0 bg-gradient-to-br from-pink-600/80 to-purple-600/80 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <div class="text-4xl mb-2">▶️</div>
+                                <p class="font-semibold">Cliente Satisfecho #3</p>
+                                <p class="text-sm opacity-80">Transformación digital</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Preguntas <span class="gradient-text">Frecuentes</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Resolvemos las dudas más comunes sobre nuestros servicios
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(1)">
+                        <h3 class="text-xl font-bold text-gray-800">¿Cuánto tiempo toma desarrollar un sitio web?</h3>
+                        <span class="text-2xl text-purple-600" id="faq-icon-1">+</span>
+                    </div>
+                    <div class="hidden mt-4 text-gray-600" id="faq-content-1">
+                        <p>El tiempo de desarrollo varía según la complejidad del proyecto. Un sitio web básico puede tomar 2-4 semanas, mientras que proyectos más complejos como e-commerce o aplicaciones web pueden requerir 6-12 semanas. Siempre proporcionamos un cronograma detallado antes de comenzar.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(2)">
+                        <h3 class="text-xl font-bold text-gray-800">¿Ofrecen mantenimiento post-lanzamiento?</h3>
+                        <span class="text-2xl text-purple-600" id="faq-icon-2">+</span>
+                    </div>
+                    <div class="hidden mt-4 text-gray-600" id="faq-content-2">
+                        <p>Sí, ofrecemos planes de mantenimiento mensual que incluyen actualizaciones de seguridad, backups, monitoreo del sitio, actualizaciones de contenido y soporte técnico. También proporcionamos 30 días de soporte gratuito después del lanzamiento.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(3)">
+                        <h3 class="text-xl font-bold text-gray-800">¿Todos los sitios web son responsivos?</h3>
+                        <span class="text-2xl text-purple-600" id="faq-icon-3">+</span>
+                    </div>
+                    <div class="hidden mt-4 text-gray-600" id="faq-content-3">
+                        <p>Absolutamente. Todos nuestros sitios web están optimizados para funcionar perfectamente en móviles, tablets, computadoras y smart TVs. Utilizamos un enfoque "mobile-first" para garantizar la mejor experiencia en todos los dispositivos.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(4)">
+                        <h3 class="text-xl font-bold text-gray-800">¿Incluyen optimización SEO?</h3>
+                        <span class="text-2xl text-purple-600" id="faq-icon-4">+</span>
+                    </div>
+                    <div class="hidden mt-4 text-gray-600" id="faq-content-4">
+                        <p>Sí, todos nuestros sitios web incluyen optimización SEO básica: estructura correcta, meta tags, velocidad de carga optimizada, y sitemap. También ofrecemos servicios avanzados de SEO y marketing digital como paquetes adicionales.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(5)">
+                        <h3 class="text-xl font-bold text-gray-800">¿Qué incluye el precio del proyecto?</h3>
+                        <span class="text-2xl text-purple-600" id="faq-icon-5">+</span>
+                    </div>
+                    <div class="hidden mt-4 text-gray-600" id="faq-content-5">
+                        <p>Nuestros precios incluyen diseño UX/UI, desarrollo completo, optimización SEO básica, integración de contenidos, pruebas de calidad, capacitación para uso del CMS y 30 días de soporte gratuito. El hosting y dominio se cotizan por separado según las necesidades.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="py-20 bg-gradient-to-br from-purple-600 to-blue-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    ¿Listo para Comenzar tu <span class="text-yellow-400">Proyecto?</span>
+                </h2>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto">
+                    Conversemos sobre cómo podemos llevar tu idea al siguiente nivel
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Formulario de Contacto -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6">Envíanos un Mensaje</h3>
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <input type="text" placeholder="Nombre" class="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-yellow-400">
+                            <input type="email" placeholder="Email" class="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-yellow-400">
+                        </div>
+                        <input type="text" placeholder="Empresa" class="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-yellow-400">
+                        <select class="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white focus:outline-none focus:border-yellow-400">
+                            <option value="">Tipo de Proyecto</option>
+                            <option value="web">Sitio Web</option>
+                            <option value="ecommerce">E-commerce</option>
+                            <option value="app">Aplicación Móvil</option>
+                            <option value="marketing">Marketing Digital</option>
+                        </select>
+                        <textarea placeholder="Cuéntanos sobre tu proyecto..." rows="4" class="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-yellow-400 resize-none"></textarea>
+                        <button type="submit" class="w-full bg-yellow-400 text-gray-900 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Información de Contacto -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">Información de Contacto</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-4">📧</span>
+                                <div>
+                                    <p class="font-semibold">Email</p>
+                                    <p class="opacity-90">hello@creativestudio.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-4">📱</span>
+                                <div>
+                                    <p class="font-semibold">Teléfono</p>
+                                    <p class="opacity-90">+54 11 1234-5678</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-4">📍</span>
+                                <div>
+                                    <p class="font-semibold">Ubicación</p>
+                                    <p class="opacity-90">Buenos Aires, Argentina</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-4">🕒</span>
+                                <div>
+                                    <p class="font-semibold">Horarios</p>
+                                    <p class="opacity-90">Lun - Vie: 9:00 - 18:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Redes Sociales -->
+                    <div>
+                        <h4 class="text-xl font-bold mb-4">Síguenos</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                                <span class="text-xl">📘</span>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                                <span class="text-xl">📷</span>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                                <span class="text-xl">🐦</span>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                                <span class="text-xl">💼</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mapa -->
+    <section class="h-96 bg-gray-300 relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+            <div class="text-center text-gray-700">
+                <div class="text-6xl mb-4">🗺️</div>
+                <h3 class="text-2xl font-bold">Ubicación en Buenos Aires</h3>
+                <p class="text-lg">José de San Martín, Chubut, Argentina</p>
+                <p class="text-sm opacity-75 mt-2">Integración con Google Maps</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Logo y Descripción -->
+                <div class="md:col-span-2">
+                    <div class="text-3xl font-bold gradient-text mb-4">CreativeStudio</div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Transformamos ideas en experiencias digitales extraordinarias. 
+                        Especializados en diseño web, desarrollo y marketing digital.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors">
+                            <span class="text-sm">📘</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors">
+                            <span class="text-sm">📷</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors">
+                            <span class="text-sm">🐦</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors">
+                            <span class="text-sm">💼</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Enlaces Rápidos -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#inicio" class="hover:text-purple-400 transition-colors">Inicio</a></li>
+                        <li><a href="#nosotros" class="hover:text-purple-400 transition-colors">Nosotros</a></li>
+                        <li><a href="#servicios" class="hover:text-purple-400 transition-colors">Servicios</a></li>
+                        <li><a href="#trabajos" class="hover:text-purple-400 transition-colors">Trabajos</a></li>
+                        <li><a href="#galeria" class="hover:text-purple-400 transition-colors">Galería</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Servicios -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Servicios</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Diseño Web</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Desarrollo</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">E-commerce</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">SEO</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Apps Móviles</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 CreativeStudio. Todos los derechos reservados.</p>
+                <p class="mt-2 text-sm">Diseñado y desarrollado con ❤️ en Argentina</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            mobileMenu.classList.toggle('hidden');
+            hamburger.classList.toggle('active');
+        }
+
+        // FAQ Toggle
+        function toggleFaq(id) {
+            const content = document.getElementById(`faq-content-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            content.classList.toggle('hidden');
+            icon.textContent = content.classList.contains('hidden') ? '+' : '-';
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade In Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('nav');
+            
+            if (!nav.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('shadow-xl');
+            } else {
+                header.classList.remove('shadow-xl');
+            }
+        });
+    </script>
+</body>
+</html>
